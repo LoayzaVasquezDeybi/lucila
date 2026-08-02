@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Lucila 💖</title>
+
+  <style>
+    :root {
+      --pink: #ff3f81;
+      --light-pink: #ff9fbd;
+      --white: #ffffff;
+      --gold: #ffd166;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at center, #250713 0%, #080008 42%, #000 75%);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .scene {
+      position: relative;
+      width: min(94vw, 720px);
+      height: min(92vh, 780px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #fff;
+      opacity: 0;
+      animation: twinkle 2.4s infinite ease-in-out;
+      box-shadow: 0 0 8px #fff, 0 0 14px var(--pink);
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.15; transform: scale(0.7); }
+      50% { opacity: 1; transform: scale(1.35); }
+    }
+
+    .heart-wrapper {
+      position: relative;
+      width: min(88vw, 560px);
+      aspect-ratio: 1 / 0.9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .light {
+      position: absolute;
+      width: clamp(6px, 1.6vw, 11px);
+      height: clamp(6px, 1.6vw, 11px);
+      border-radius: 50%;
+      background: var(--pink);
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0);
+      box-shadow:
+        0 0 6px var(--white),
+        0 0 12px var(--pink),
+        0 0 24px var(--pink),
+        0 0 38px var(--pink);
+      animation:
+        appear 0.45s forwards,
+        pulse 1.3s infinite ease-in-out;
+      animation-delay:
+        calc(var(--i) * 0.035s),
+        calc(var(--i) * 0.035s + 0.5s);
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        filter: brightness(0.85);
+        transform: translate(-50%, -50%) scale(0.9);
+      }
+      50% {
+        filter: brightness(1.55);
+        transform: translate(-50%, -50%) scale(1.25);
+      }
+    }
+
+    .center-message {
+      position: absolute;
+      top: 49%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.7);
+      width: 75%;
+      text-align: center;
+      opacity: 0;
+      animation: showMainText 1.2s 2.5s forwards ease-out;
+      z-index: 5;
+    }
+
+    .center-message h1 {
+      font-size: clamp(2rem, 8vw, 4.8rem);
+      line-height: 1;
+      color: #fff;
+      text-shadow:
+        0 0 8px #fff,
+        0 0 18px var(--pink),
+        0 0 35px var(--pink);
+      letter-spacing: 1px;
+    }
+
+    .center-message span {
+      display: block;
+      margin-top: 12px;
+      font-size: clamp(1.1rem, 4vw, 2rem);
+      color: var(--light-pink);
+      text-shadow: 0 0 12px var(--pink);
+    }
+
+    @keyframes showMainText {
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    .final-message {
+      position: absolute;
+      bottom: clamp(12px, 3vh, 34px);
+      width: min(92vw, 650px);
+      text-align: center;
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 99, 150, 0.45);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(7px);
+      box-shadow:
+        0 0 18px rgba(255, 63, 129, 0.3),
+        inset 0 0 18px rgba(255, 63, 129, 0.08);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: finalText 1.2s 5.2s forwards ease-out;
+    }
+
+    .final-message h2 {
+      color: var(--gold);
+      font-size: clamp(1.1rem, 4.4vw, 2rem);
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(255, 209, 102, 0.7);
+    }
+
+    .final-message p {
+      font-size: clamp(0.95rem, 3.6vw, 1.35rem);
+      line-height: 1.45;
+      color: #fff;
+    }
+
+    @keyframes finalText {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .floating-heart {
+      position: fixed;
+      bottom: -30px;
+      font-size: 18px;
+      opacity: 0;
+      pointer-events: none;
+      animation: floatUp linear forwards;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(0.7) rotate(0deg);
+        opacity: 0;
+      }
+      15% { opacity: 0.8; }
+      100% {
+        transform: translateY(-115vh) scale(1.5) rotate(20deg);
+        opacity: 0;
+      }
+    }
+
+    .replay {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+      padding: 9px 13px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      backdrop-filter: blur(6px);
+      z-index: 20;
+    }
+
+    .replay:active {
+      transform: scale(0.96);
+    }
+
+    @media (max-height: 650px) {
+      .scene {
+        height: 100vh;
+      }
+
+      .heart-wrapper {
+        width: min(70vh, 500px);
+      }
+
+      .final-message {
+        bottom: 4px;
+        padding: 9px 12px;
+      }
+
+      .final-message h2 {
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stars" id="stars"></div>
+
+  <button class="replay" onclick="location.reload()">Repetir ✨</button>
+
+  <main class="scene">
+    <section class="heart-wrapper" id="heart">
+      <div class="center-message">
+        <h1>Lucila</h1>
+        <span>TKM 💖</span>
+      </div>
+    </section>
+
+    <section class="final-message">
+      <h2>Feliz 1 de agosto ✨</h2>
+      <p>No eres espectadora de nada.<br>Mejórate, mi niña 💕</p>
+    </section>
+  </main>
+
+  <script>
+    const heart = document.getElementById("heart");
+    const stars = document.getElementById("stars");
+
+    // Crear el corazón con puntos de luz.
+    // Fórmula paramétrica clásica de corazón.
+    const totalLights = 120;
+
+    for (let i = 0; i < totalLights; i++) {
+      const t = (Math.PI * 2 * i) / totalLights;
+
+      const x = 16 * Math.pow(Math.sin(t), 3);
+      const y =
+        13 * Math.cos(t) -
+        5 * Math.cos(2 * t) -
+        2 * Math.cos(3 * t) -
+        Math.cos(4 * t);
+
+      const light = document.createElement("span");
+      light.className = "light";
+      light.style.setProperty("--i", i);
+
+      const left = 50 + x * 2.45;
+      const top = 51 - y * 2.45;
+
+      light.style.left = `${left}%`;
+      light.style.top = `${top}%`;
+
+      heart.appendChild(light);
+    }
+
+    // Estrellas suaves del fondo
+    for (let i = 0; i < 45; i++) {
+      const star = document.createElement("span");
+      star.className = "star";
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.animationDelay = `${Math.random() * 2.4}s`;
+      star.style.animationDuration = `${1.6 + Math.random() * 2.5}s`;
+      stars.appendChild(star);
+    }
+
+    // Corazones flotantes después de terminar la animación principal
+    setTimeout(() => {
+      setInterval(() => {
+        const floatingHeart = document.createElement("div");
+        floatingHeart.className = "floating-heart";
+        floatingHeart.textContent = Math.random() > 0.5 ? "💖" : "✨";
+        floatingHeart.style.left = `${Math.random() * 100}vw`;
+        floatingHeart.style.animationDuration = `${4 + Math.random() * 4}s`;
+        floatingHeart.style.fontSize = `${14 + Math.random() * 18}px`;
+
+        document.body.appendChild(floatingHeart);
+
+        setTimeout(() => floatingHeart.remove(), 8500);
+      }, 650);
+    }, 5200);
+  </script>
+</body>
+</html>
